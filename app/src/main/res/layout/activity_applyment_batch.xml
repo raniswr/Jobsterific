@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".user.ui.ApplymentBatchActivity">
+
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/white"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/abezee_regular"
+            android:text="Make Applyment"
+            android:textColor="@color/black"
+            android:textSize="27sp"
+            android:layout_margin="20dp"
+            app:layout_constraintTop_toBottomOf="@id/action_image"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            tools:ignore="MissingConstraints" />
+
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textSet1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:ems="200"
+            android:hint="Name"
+            android:inputType="textEmailAddress"
+            tools:ignore="SpeakableTextPresentCheck"
+            app:layout_constraintStart_toEndOf="@id/icon1"
+            app:layout_constraintTop_toTopOf="@id/icon1"
+            android:fontFamily="@font/abezee_regular"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            />
+        <!-- Icon 2 -->
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textSet2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:ems="200"
+            android:hint="Adress"
+            android:inputType="textEmailAddress"
+            tools:ignore="SpeakableTextPresentCheck"
+            app:layout_constraintStart_toEndOf="@id/icon2"
+            app:layout_constraintTop_toTopOf="@id/icon2"
+            app:layout_constraintBottom_toBottomOf="@id/textSet1"
+            android:fontFamily="@font/abezee_regular"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textSet3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:ems="200"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            tools:ignore="SpeakableTextPresentCheck"
+            app:layout_constraintStart_toEndOf="@id/icon2"
+            app:layout_constraintTop_toTopOf="@id/icon2"
+            app:layout_constraintBottom_toBottomOf="@id/textSet1"
+            android:fontFamily="@font/abezee_regular"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_margin="6dp"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/statusResume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MyReseume.pdf"
+                android:textSize="15sp"
+                android:textColor="@color/lightBlack"
+                android:fontFamily="@font/abezee_regular"
+                android:layout_marginStart="16dp" />
+
+            <!-- Icon 2 -->
+            <ImageView
+                android:id="@+id/iconUpload"
+                android:layout_width="15dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_up_resume"
+                android:contentDescription="Icon 2"
+                app:layout_constraintStart_toEndOf="@id/statusResume"
+                app:tint="@color/black"
+                android:layout_marginStart="110dp"
+                />
+
+            <TextView
+                android:id="@+id/textUpResume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Resume"
+                android:textSize="10sp"
+                android:textColor="@color/lightBlack"
+                android:fontFamily="@font/abezee_regular"
+                app:layout_constraintStart_toEndOf="@id/iconUpload"
+                app:layout_constraintTop_toTopOf="@id/iconUpload"
+                app:layout_constraintBottom_toBottomOf="@id/iconUpload"
+                android:layout_marginStart="5dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apply "
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/blue"
+           android:layout_marginTop="30dp"
+            android:textSize="15sp"
+            android:fontFamily="@font/abezee_regular"
+            />
+
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+

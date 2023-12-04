@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".user.ui.UploadResumeActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:id="@+id/appbar"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:minHeight="?attr/actionBarSize">
+            <ImageButton
+                android:id="@+id/buttonSave"
+                app:srcCompat="@drawable/ic_save"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:scaleType="fitCenter"
+                android:backgroundTint="@color/white"
+                android:visibility="visible"
+                tools:ignore="SpeakableTextPresentCheck"
+                />
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/appbar"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="30dp"
+        android:background="@color/white"
+
+   >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <!-- CardView with ImageView -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/action_image"
+                android:layout_width="120dp"
+                android:layout_marginLeft="15dp"
+                android:layout_height="120dp"
+                android:padding="10dp"
+                app:cardCornerRadius="60dp"
+                tools:ignore="MissingConstraints"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:contentDescription="TODO"/>
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/Username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/abezee_regular"
+                android:text="Samuel Zakaria"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                app:layout_constraintTop_toBottomOf="@id/action_image"
+                android:gravity="center_horizontal"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                tools:ignore="MissingConstraints" />
+
+
+
+
+
+            <TextView
+                android:id="@+id/aboveTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:layout_constraintTop_toBottomOf="@id/Username"
+                android:fontFamily="@font/abezee_regular"
+                android:textAlignment="center"
+                android:text="Edit Profile"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+
+                android:paddingBottom="8dp"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+
+                />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <!-- Icon 1 -->
+            <ImageView
+                android:id="@+id/icon1"
+                android:layout_width="18dp"
+                android:layout_height="34dp"
+                android:src="@drawable/ic_profile"
+                android:contentDescription="Icon 1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/blueLight"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:ems="200"
+                android:text="Samuel Zakaria"
+                android:inputType="textEmailAddress"
+                tools:ignore="SpeakableTextPresentCheck"
+                app:layout_constraintStart_toEndOf="@id/icon1"
+                app:layout_constraintTop_toTopOf="@id/icon1"
+                app:layout_constraintBottom_toBottomOf="@id/icon1"
+                android:fontFamily="@font/abezee_regular"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                />
+            <!-- Icon 2 -->
+            <ImageView
+                android:id="@+id/icon2"
+                android:layout_width="18dp"
+                android:layout_height="38dp"
+                android:src="@drawable/ic_call"
+                android:contentDescription="Icon 2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editUsername"
+                app:tint="@color/blueLight"
+                android:layout_marginTop="16dp"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:ems="200"
+                android:text="08199973738392002"
+                android:inputType="textEmailAddress"
+                tools:ignore="SpeakableTextPresentCheck"
+                app:layout_constraintStart_toEndOf="@id/icon2"
+                app:layout_constraintTop_toTopOf="@id/icon2"
+                app:layout_constraintBottom_toBottomOf="@id/icon2"
+                android:fontFamily="@font/abezee_regular"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+
+
+                />
+
+
+            <ImageView
+                android:id="@+id/icon3"
+                android:layout_width="18dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_education"
+                android:contentDescription="Icon 3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/number"
+                android:layout_marginTop="16dp"
+                app:tint="@color/blueLight" />
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:ems="200"
+                android:text="Profesional Cloud Computing "
+                android:inputType="textEmailAddress"
+                tools:ignore="SpeakableTextPresentCheck"
+                app:layout_constraintStart_toEndOf="@id/icon3"
+                app:layout_constraintTop_toTopOf="@id/icon3"
+                app:layout_constraintBottom_toBottomOf="@id/icon3"
+                android:fontFamily="@font/abezee_regular"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                />
+
+            <ImageView
+                android:id="@+id/icon4"
+                android:layout_width="18dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_email"
+                android:contentDescription="Icon 3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:tint="@color/blueLight"
+                app:layout_constraintTop_toBottomOf="@id/job"
+                android:layout_marginTop="16dp"/>
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:ems="200"
+                android:text="samuelzakaria28@gmail.com"
+                android:inputType="textEmailAddress"
+                tools:ignore="SpeakableTextPresentCheck"
+                app:layout_constraintStart_toEndOf="@id/icon4"
+                app:layout_constraintTop_toTopOf="@id/icon4"
+                app:layout_constraintBottom_toBottomOf="@id/icon4"
+                android:fontFamily="@font/abezee_regular"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                />
+
+
+
+            <ImageView
+                android:id="@+id/icon5"
+                android:layout_width="18dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_maps"
+                android:contentDescription="Icon 3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/email"
+                app:tint="@color/blueLight"
+                android:layout_marginTop="16dp"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/adress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:ems="200"
+                android:text="Jl. Halat No.8, Ps. Merah Bar., Kec. Medan Kota, Kota Medan, Sumatera Utara 20211"
+                android:inputType="textEmailAddress"
+                tools:ignore="SpeakableTextPresentCheck"
+                app:layout_constraintStart_toEndOf="@id/icon5"
+                app:layout_constraintTop_toTopOf="@id/icon5"
+                app:layout_constraintBottom_toBottomOf="@id/icon5"
+                android:fontFamily="@font/abezee_regular"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".authentication.SignupActivity">
+
+
+    <!-- ImageView -->
+    <ImageView
+        android:id="@+id/myImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/welcome"
+        android:layout_margin="20dp"
+        android:contentDescription="Your Image Description"
+        android:layout_gravity="center"
+
+        />
+    <TextView
+        android:id="@+id/imageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Welcome to Jobsterific"
+        android:textColor="@color/lightBlack"
+        android:layout_marginHorizontal="100dp"
+        android:textSize="28sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/abezee_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button1"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Signup as Jobseeker"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:textAllCaps="false"
+        android:textColor="@color/lightBlack"
+        app:strokeColor="@color/buttonOutline"
+        android:fontFamily="@font/abezee_regular"
+        app:cornerRadius="10dp" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button2"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Signup as Recruiter"
+        android:layout_marginHorizontal="30dp"
+        android:textColor="@color/lightBlack"
+        app:strokeColor="@color/buttonOutline"
+        android:textAllCaps="false"
+        android:fontFamily="@font/abezee_regular"
+        app:cornerRadius="10dp" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

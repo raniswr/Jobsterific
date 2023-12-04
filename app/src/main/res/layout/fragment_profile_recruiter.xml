@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:title=""
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="start"
+            android:layout_marginTop="40dp"
+            android:layout_marginHorizontal="10dp"
+            android:padding="10dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:padding="10dp">
+
+                <!-- CardView with ImageView -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/action_image"
+                    android:layout_width="120dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_height="120dp"
+                    android:padding="10dp"
+                    app:cardCornerRadius="60dp"
+                    tools:ignore="MissingConstraints"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:contentDescription="TODO"/>
+                </androidx.cardview.widget.CardView>
+
+
+                <TextView
+                    android:id="@+id/companyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/abezee_regular"
+                    android:text="Planet Phone"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    app:layout_constraintTop_toBottomOf="@id/action_image"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                    tools:ignore="MissingConstraints" />
+
+
+
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:layout_constraintTop_toBottomOf="@id/companyName"
+                    android:fontFamily="@font/abezee_regular"
+                    android:text="Planet Phone is a company that provides various kinds of quality gadgets at affordable prices. Planet Phone sells smartphones, tablets, laptops, smartwatches and other accessories from various well-known brands, such as Samsung, Apple, Huawei, Xiaomi, Asus, Lenovo and others. Planet Phone also offers after-sales services, such as warranty, repair and product replacement. Planet Phone has branches throughout Indonesia and also serves online purchases through its official website"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:paddingBottom="8dp"
+                    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                    android:gravity="center_vertical"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/icon1"
+                    android:layout_width="18dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/ic_company"
+                    android:contentDescription="Icon 1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/blueLight"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"/>
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Planet Phone"
+                    android:textSize="12sp"
+                    android:textColor="@color/lightBlack"
+                    android:fontFamily="@font/abezee_regular"
+                    app:layout_constraintStart_toEndOf="@id/icon1"
+                    app:layout_constraintTop_toTopOf="@id/icon1"
+                    app:layout_constraintBottom_toBottomOf="@id/icon1"
+                    android:layout_marginStart="16dp" />
+
+
+
+                <!-- Icon 2 -->
+                <ImageView
+                    android:id="@+id/icon2"
+                    android:layout_width="18dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/ic_call"
+                    android:contentDescription="Icon 2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/name"
+                    app:tint="@color/blueLight"
+                    android:layout_marginTop="26dp"/>
+
+                <TextView
+                    android:id="@+id/number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0891997378383"
+                    android:fontFamily="@font/abezee_regular"
+                    android:textSize="12sp"
+                    android:textColor="@color/lightBlack"
+                    app:layout_constraintStart_toEndOf="@id/icon2"
+                    app:layout_constraintTop_toTopOf="@id/icon2"
+                    app:layout_constraintBottom_toBottomOf="@id/icon2"
+                    android:layout_marginStart="16dp" />
+
+                <ImageView
+                    android:id="@+id/icon3"
+                    android:layout_width="18dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_email"
+                    android:contentDescription="Icon 3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/number"
+                    android:layout_marginTop="16dp"
+                    app:tint="@color/blueLight" />
+
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="planetphone@gmail.com"
+                    android:textSize="12sp"
+                    android:textColor="@color/lightBlack"
+                    android:fontFamily="@font/abezee_regular"
+                    app:layout_constraintStart_toEndOf="@id/icon3"
+                    app:layout_constraintTop_toTopOf="@id/icon3"
+                    app:layout_constraintBottom_toBottomOf="@id/icon3"
+                    android:layout_marginStart="16dp" />
+
+
+                <ImageView
+                    android:id="@+id/icon4"
+                    android:layout_width="18dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_web"
+                    android:contentDescription="Icon 3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:tint="@color/blueLight"
+                    app:layout_constraintTop_toBottomOf="@id/email"
+                    android:layout_marginTop="16dp"/>
+
+                <TextView
+                    android:id="@+id/website"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="www.planet.com.tw"
+                    android:textSize="12sp"
+                    android:textColor="@color/lightBlack"
+                    android:fontFamily="@font/abezee_regular"
+                    app:layout_constraintStart_toEndOf="@id/icon4"
+                    app:layout_constraintTop_toTopOf="@id/icon4"
+                    app:layout_constraintBottom_toBottomOf="@id/icon4"
+                    android:layout_marginStart="16dp" />
+
+
+                <ImageView
+                    android:id="@+id/icon5"
+                    android:layout_width="18dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_maps"
+                    android:contentDescription="Icon 3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/website"
+                    app:tint="@color/blueLight"
+                    android:layout_marginTop="16dp"/>
+
+                <TextView
+                    android:id="@+id/adress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jl. Halat No.8, Ps. Merah Bar., Kec. Medan Kota, Kota Medan, Sumatera Utara 20211"
+                    android:textSize="12sp"
+                    android:textColor="@color/lightBlack"
+                    android:fontFamily="@font/abezee_regular"
+                    android:maxLines="1"
+                    app:layout_constraintStart_toEndOf="@id/icon5"
+                    app:layout_constraintTop_toTopOf="@id/icon5"
+                    app:layout_constraintBottom_toBottomOf="@id/icon5"
+                    android:layout_marginStart="16dp" />
+
+
+
+
+                <!-- Add more icons and text views as needed -->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+    </FrameLayout>
+</ScrollView>

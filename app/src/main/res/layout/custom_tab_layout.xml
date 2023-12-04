@@ -1,0 +1,26 @@
+<!-- res/layout/custom_tab_layout.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/tab_icon"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_home" />
+
+    <TextView
+        android:id="@+id/tab_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tab_icon"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/abezee_regular"
+
+        android:text="Tab Title"
+        android:textSize="12sp"
+        android:textColor="@color/black" />
+
+</RelativeLayout>

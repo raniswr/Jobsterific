@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".recruiter.ui.NewCampaignActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title=""
+            android:background="@color/white">
+
+
+            <ImageButton
+                android:id="@+id/buttonSave"
+                app:srcCompat="@drawable/ic_save_campaign"
+                android:layout_width="28dp"
+                android:layout_marginEnd="5dp"
+                android:layout_height="28dp"
+                android:layout_gravity="end"
+                android:background="@color/white"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:scaleType="fitCenter"
+                android:visibility="visible"
+                tools:ignore="SpeakableTextPresentCheck"
+                />
+
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+    android:orientation="vertical">
+
+    <!-- Campaign Name -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/LayoutCampaignName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxStrokeColor="@color/buttonOutline"
+        android:hint="Campaign Name"
+        app:hintTextColor="@color/black">
+
+        <!-- TextInputEditText for user input -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/CampaignName"
+            android:layout_width="match_parent"
+            android:fontFamily="@font/abezee_regular"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/lightGray"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/LayoutDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/buttonOutline"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:hintTextColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:boxCornerRadiusTopStart="20dp">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="208dp"
+                android:hint="Description"
+                android:fontFamily="@font/abezee_regular"
+                android:inputType="textMultiLine"
+                android:minLines="6"
+                android:focusableInTouchMode="true"
+                android:scrollbars="vertical"
+                android:scrollbarThumbVertical="@color/black"
+                android:scrollbarTrackVertical="@color/white"
+                android:fadeScrollbars="false"
+                android:textColor="@color/lightBlack" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/LayoutCampaignStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxStrokeColor="@color/buttonOutline"
+        android:hint="Campaign Start"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/ic_calendar"
+        app:hintTextColor="@color/black">
+
+        <!-- TextInputEditText for user input -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/campaignStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/abezee_regular"
+            android:maxLength="10"
+            android:textColor="@color/black"
+            android:inputType="date" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/LayoutCampaignEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            app:boxCornerRadiusTopStart="15dp"
+            app:boxCornerRadiusBottomEnd="15dp"
+            app:boxCornerRadiusBottomStart="15dp"
+            app:boxCornerRadiusTopEnd="15dp"
+            app:boxStrokeColor="@color/buttonOutline"
+            android:hint="Campaign End"
+            app:hintTextColor="@color/black"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/ic_calendar">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/campaignEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/abezee_regular"
+                android:maxLength="10"
+                android:inputType="date" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/LayoutFeildOfWork"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxStrokeColor="@color/buttonOutline"
+        android:hint="Field of Works"
+        app:hintTextColor="@color/black">
+
+        <!-- TextInputEditText for user input -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/feildOfWork"
+            android:layout_width="match_parent"
+            android:fontFamily="@font/abezee_regular"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Keywords -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/LayoutKeywords"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/buttonOutline"
+        android:layout_marginVertical="10dp"
+        android:hint="Keywords"
+        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:hintTextColor="@color/black"
+        app:hintEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/keywords"
+            android:fontFamily="@font/abezee_regular"
+            android:layout_width="match_parent"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+</LinearLayout>
+
+
+</LinearLayout>
+</ScrollView>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".recruiter.ui.NewCampaignActivity">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title=""
+
+                android:background="@color/white">
+
+
+
+
+            </androidx.appcompat.widget.Toolbar>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/editTextCampaignName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/edittext_stroke"
+                android:gravity="start|top"
+                android:padding="10dp"
+                android:text="Tech Hiring Batch"
+                android:hint="Campaign Name"
+                android:textSize="14sp"
+                android:fontFamily="@font/abezee_regular"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black" />
+
+
+            <EditText
+                android:id="@+id/editTextDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/edittext_stroke"
+                android:gravity="start|top"
+                android:fontFamily="@font/abezee_regular"
+                android:textSize="14sp"
+                android:padding="10dp"
+                android:text="We are looking for talented and motivated individuals who have the skills and experience in cloud computing and artificial intelligence to join our company. You will work on exciting projects that leverage Google Cloud, IBM AI, and other modern tools and frameworks to solve real-world problems and create value for our customers. You will also have the opportunity to learn from industry experts, collaborate with peers, and advance your career in the fast-growing field of cloud and AI. Your Journey with Us:
+Exciting Projects: Engage in projects that harness the potential of Google Cloud, IBM AI, and other advanced tools. Dive into real-world problem-solving, contributing to impactful solutions.
+Continuous Learning: Seize the opportunity to learn from industry experts. Our environment fosters a culture of continuous learning, ensuring you stay at the forefront of advancements in cloud computing and AI."
+                android:hint="Campaign Name"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/LayoutCampaignStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxStrokeColor="@color/buttonOutline"
+                android:textSize="14sp"
+                android:hint="Campaign Start"
+                android:fontFamily="@font/abezee_regular"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_calendar"
+                app:hintTextColor="@color/black">
+
+                <!-- TextInputEditText for user input -->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/campaignStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/abezee_regular"
+                    android:focusable="false"
+                    android:textSize="14sp"
+                    android:text="09/02/2023"
+                    android:clickable="true"
+                    android:onClick="showDatePickerDialog"
+                    android:textColor="@color/black"
+                    android:inputType="date" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/LayoutCampaignEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxStrokeColor="@color/buttonOutline"
+
+                android:hint="Campaign End"
+                app:hintTextColor="@color/black"
+                app:endIconMode="custom"
+                android:textSize="14sp"
+                app:endIconDrawable="@drawable/ic_calendar">
+
+                <!-- TextInputEditText for user input -->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/campaignEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="09/08/2023"
+                    android:fontFamily="@font/abezee_regular"
+                    android:textSize="14sp"
+                    android:inputType="date" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!-- Field of Works -->
+            <EditText
+                android:id="@+id/editTextFeildofWork"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/abezee_regular"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/edittext_stroke"
+                android:gravity="start|top"
+                android:padding="10dp"
+                android:textSize="14sp"
+                android:text="Profesional Cloud Computing, Profesional Artificial Intelligence   "
+                 android:hint="Campaign Name"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black" />
+
+            <!-- Keywords -->
+            <EditText
+                android:id="@+id/editTextKeyword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/edittext_stroke"
+                android:gravity="start|top"
+                android:fontFamily="@font/abezee_regular"
+                android:padding="10dp"
+                android:text="#Collaboration #Artificial Intelligence #Cloud Computing"
+                android:hint="Campaign Name"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonPost"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Save Campaign"
+            android:layout_marginHorizontal="10dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/green"
+            app:strokeColor="@color/buttonOutline"
+            android:textSize="14dp"
+            android:fontFamily="@font/abezee_regular"
+            android:inputType="text|textNoSuggestions"
+            app:cornerRadius="10dp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonDelete"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Delete Campaign"
+            android:layout_marginHorizontal="10dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/red"
+            app:strokeColor="@color/buttonOutline"
+            android:textSize="14dp"
+            android:fontFamily="@font/abezee_regular"
+            android:inputType="text|textNoSuggestions"
+            app:cornerRadius="10dp" />
+    </LinearLayout>
+</ScrollView>

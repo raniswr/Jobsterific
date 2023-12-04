@@ -1,0 +1,311 @@
+<!-- res/layout/your_activity_layout.xml -->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                app:titleTextColor="@color/black"
+                app:subtitleTextAppearance="@font/abezee_regular"
+
+                app:title="Tech Hiring Batch"/>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- Linear layout to hold three text views -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="60dp"
+            >
+            <LinearLayout
+                android:id="@+id/profileLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="20dp"
+
+                tools:ignore="MissingConstraints">
+
+                <!-- Profile Image -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/profileImageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="start|center_horizontal"
+                    android:padding="10dp"
+                    app:cardCornerRadius="60dp">
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_profile"
+                        android:contentDescription="TODO" />
+                </androidx.cardview.widget.CardView>
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp">
+
+
+                    <TextView
+                        android:id="@+id/nameTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A.A Rani Prabaswari Dewi"
+                        android:layout_marginTop="5dp"
+
+                        android:fontFamily="@font/abezee_regular"
+                        android:textSize="20sp"
+                        android:contentDescription="User Name"/>
+
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="start"
+                android:layout_marginHorizontal="30dp">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_profile"
+                    android:layout_gravity="center_vertical"
+                    app:tint="@color/blue" />
+
+                <TextView
+                    android:id="@+id/statusCandidate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/abezee_regular"
+                    android:textSize="10sp"
+                    android:text="Unhired"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginVertical="10dp"
+                    android:textColor="@android:color/black"
+                    android:gravity="start"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="start"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="30dp">
+
+                <ImageView
+
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_education"
+                    android:layout_gravity="center_vertical"
+                    app:tint="@color/blue" />
+
+                <TextView
+                    android:id="@+id/job"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/abezee_regular"
+                    android:textSize="10sp"
+                    android:text="Profesional Mobile Developer"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginVertical="10dp"
+                    android:textColor="@android:color/black"
+                    android:gravity="start"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="start"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="30dp">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_email"
+                    android:layout_gravity="center_vertical"
+                    app:tint="@color/blue" />
+
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/abezee_regular"
+
+                    android:textSize="10sp"
+                    android:text="A113BSX2173@bangkit.academy"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginVertical="10dp"
+                    android:textColor="@android:color/black"
+                    android:gravity="start"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="start"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="30dp">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_call"
+                    android:layout_gravity="center_vertical"
+                    app:tint="@color/blue" />
+
+                <TextView
+                    android:id="@+id/number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/abezee_regular"
+
+                    android:textSize="10sp"
+                    android:text="0819777865553"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginVertical="10dp"
+                    android:maxLines="1"
+                    android:textColor="@android:color/black"
+                    android:gravity="start"/>
+            </LinearLayout>
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:gravity="start"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="30dp">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_map"
+                    android:layout_gravity="center_vertical"
+                    app:tint="@color/blue" />
+
+                <TextView
+                    android:id="@+id/adress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/abezee_regular"
+                    android:textSize="10sp"
+                    android:text="Jl. Halat No.8, Ps. Merah Bar., Kec. Medan Kota, Kota Medan, Sumatera Utara 20211"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginVertical="10dp"
+                    android:maxLines="1"
+                    android:textColor="@android:color/black"
+                    android:gravity="start"/>
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button2"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="View Resume"
+                android:layout_marginHorizontal="30dp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/blue"
+                app:strokeColor="@color/buttonOutline"
+                android:textSize="14dp"
+                android:fontFamily="@font/abezee_regular"
+                android:inputType="text|textNoSuggestions"
+                app:cornerRadius="10dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:orientation="horizontal">
+
+                <!-- Button 1 -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonEmail"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Send an email"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/green"
+                    app:strokeColor="@color/buttonOutline"
+                    android:textSize="14dp"
+                    android:inputType="text|textNoSuggestions"
+                    android:fontFamily="@font/abezee_regular"
+                    app:cornerRadius="10dp" />
+
+                <!-- Button 2 -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonNumber"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Add Number"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/green"
+                    app:strokeColor="@color/buttonOutline"
+                    android:textSize="14dp"
+                    android:inputType="text|textNoSuggestions"
+                    android:fontFamily="@font/abezee_regular"
+                    app:cornerRadius="10dp" />
+            </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonDelete"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Delete from list"
+                android:layout_marginHorizontal="30dp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/red"
+                app:strokeColor="@color/buttonOutline"
+                android:textSize="14dp"
+                android:fontFamily="@font/abezee_regular"
+                android:inputType="text|textNoSuggestions"
+                app:cornerRadius="10dp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>

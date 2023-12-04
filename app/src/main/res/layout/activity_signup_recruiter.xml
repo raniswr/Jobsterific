@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        tools:context=".authentication.SignupRecruiterActivity">
+
+
+
+        <TextView
+            android:id="@+id/imageTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign up"
+            android:textColor="@color/lightBlack"
+            android:layout_marginHorizontal="30dp"
+            android:textSize="28sp"
+            android:textAlignment="textStart"
+            android:layout_marginBottom="10dp"
+            android:paddingTop="10dp"
+            android:fontFamily="@font/abezee_regular"
+            />
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/firstNameEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="26dp"
+            app:boxBackgroundMode="outline"
+            android:layout_marginVertical="20dp"
+            app:boxStrokeColor="@color/buttonOutline"
+            app:startIconTint="@color/lightBlack"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxStrokeWidth="0.5dp"
+            app:hintEnabled="false"
+            app:boxCornerRadiusTopStart="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/firstName"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:hint="Comapny Name"
+                android:textColorHint="@color/lightGray"
+                android:fontFamily="@font/abezee_regular"
+                android:textColor="@color/lightBlack"
+                android:inputType="text"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="26dp"
+            app:boxBackgroundMode="outline"
+
+            app:boxStrokeColor="@color/buttonOutline"
+            app:startIconTint="@color/lightBlack"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:hintEnabled="false"
+            app:boxStrokeWidth="0.5dp"
+            app:boxCornerRadiusTopStart="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:textColor="@color/lightBlack"
+                android:inputType="textEmailAddress"
+                android:hint="Email"
+                android:textColorHint="@color/lightGray"
+                android:fontFamily="@font/abezee_regular"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/DescriptionEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:layout_marginHorizontal="26dp"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/buttonOutline"
+            app:startIconTint="@color/lightBlack"
+            app:hintEnabled="false"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxStrokeWidth="0.5dp"
+            app:boxCornerRadiusTopStart="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="108dp"
+                android:textColor="@color/lightBlack"
+                android:hint="Description"
+                android:inputType="textMultiLine"
+                android:minLines="6"
+                android:focusableInTouchMode="true"
+                android:scrollbars="vertical"
+                android:textColorHint="@color/lightGray"
+                android:fadeScrollbars="false"
+                android:fontFamily="@font/abezee_regular"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/webEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="26dp"
+            app:boxBackgroundMode="outline"
+
+            app:boxStrokeColor="@color/buttonOutline"
+            app:startIconTint="@color/lightBlack"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:hintEnabled="false"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxStrokeWidth="0.5dp"
+            app:boxCornerRadiusTopStart="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/website"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:textColor="@color/lightBlack"
+                android:inputType="textWebEditText"
+                android:hint="Website"
+                android:textColorHint="@color/lightGray"
+                android:fontFamily="@font/abezee_regular"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/adressEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="26dp"
+            app:boxBackgroundMode="outline"
+            android:layout_marginVertical="20dp"
+            app:boxStrokeColor="@color/buttonOutline"
+            app:startIconTint="@color/lightBlack"
+            app:hintEnabled="false"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxStrokeWidth="0.5dp"
+            app:boxCornerRadiusTopStart="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/adress"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:textColor="@color/lightBlack"
+                android:inputType="text"
+                android:hint="Adress"
+                android:textColorHint="@color/lightGray"
+                android:fontFamily="@font/abezee_regular"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="26dp"
+            app:boxBackgroundMode="outline"
+            app:hintEnabled="false"
+            app:boxStrokeColor="@color/buttonOutline"
+            app:startIconTint="@color/lightBlack"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxStrokeWidth="0.5dp"
+            app:endIconMode="custom"
+            app:boxCornerRadiusTopStart="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:textColor="@color/lightBlack"
+                android:inputType="text"
+                android:hint="Password"
+                android:textColorHint="@color/lightGray"
+                android:fontFamily="@font/abezee_regular"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/signupRecruiter"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:text="Sign Up"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/black"
+            android:layout_marginHorizontal="25dp"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:fontFamily="@font/abezee_regular"
+            app:cornerRadius="18dp" />
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>

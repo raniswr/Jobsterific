@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".authentication.SigninActivity">
+
+
+
+    <TextView
+        android:id="@+id/imageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign in"
+        android:textColor="@color/lightBlack"
+        android:layout_marginHorizontal="30dp"
+        android:textSize="28sp"
+        android:textAlignment="textStart"
+        android:layout_marginBottom="10dp"
+        android:paddingTop="120dp"
+        android:fontFamily="@font/abezee_regular"
+       />
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailEditTextLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="26dp"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/buttonOutline"
+        app:startIconTint="@color/lightBlack"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:startIconDrawable="@drawable/ic_email"
+        app:boxStrokeWidth="0.5dp"
+        app:boxCornerRadiusTopStart="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+
+            android:inputType="textEmailAddress"
+            android:fontFamily="@font/abezee_regular"
+
+            android:textColor="@color/lightBlack" />
+    </com.google.android.material.textfield.TextInputLayout><com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/passwordEditTextLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="26dp"
+    app:boxBackgroundMode="outline"
+    app:boxStrokeColor="@color/buttonOutline"
+    app:startIconTint="@color/lightBlack"
+    app:boxCornerRadiusBottomEnd="8dp"
+    app:boxCornerRadiusBottomStart="8dp"
+    app:boxCornerRadiusTopEnd="8dp"
+    app:startIconDrawable="@drawable/ic_password"
+    app:boxStrokeWidth="0.5dp"
+    app:boxCornerRadiusTopStart="8dp">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+ android:textColor="@color/lightBlack"
+        android:inputType="textEmailAddress"
+        android:fontFamily="@font/abezee_regular"
+      />
+</com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signin"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:text="Sign In"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/black"
+        android:layout_marginHorizontal="25dp"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:fontFamily="@font/abezee_regular"
+        app:cornerRadius="18dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+      >
+
+        <!-- First TextView -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="wrap_content"
+            android:text="Dont have any account? "
+            android:textSize="16sp"
+            android:fontFamily="@font/abezee_regular"
+            android:textColor="@color/black"
+            android:gravity="end"
+
+
+            />
+
+        <!-- Second TextView -->
+        <TextView
+            android:id="@+id/signup"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+
+            android:textSize="16sp"
+            android:fontFamily="@font/abezee_regular"
+            android:textColor="@color/blue"
+     />
+
+    </LinearLayout>
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

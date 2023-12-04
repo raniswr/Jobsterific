@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context=".user.ui.DashboardUserActivity">
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNav"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:elevation="8dp"
+        android:backgroundTint="@color/white"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/nav_background_curved"
+        app:itemIconTint="@drawable/bottom_nav_color_recruiter"
+        app:itemTextColor="@drawable/bottom_nav_color_recruiter"
+        app:menu="@menu/menu_recruiter"
+        app:itemActiveIndicatorStyle="@color/white"
+        android:scrollIndicators="left"
+        android:clipChildren="false">
+
+        <ImageView
+            android:id="@+id/fab"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:src="@drawable/ic_batch"
+            android:background="@drawable/circular_background"
+            android:elevation="6dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:scaleType="centerInside" />
+
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+</RelativeLayout>
