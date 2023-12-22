@@ -8,7 +8,7 @@ data class MakeApplymentResponse(
 	val newApplyment: NewApplyment? = null,
 
 	@field:SerializedName("user")
-	val user: User? = null
+	val user: UserApplyment? = null
 )
 
 data class NewApplyment(
@@ -32,7 +32,7 @@ data class NewApplyment(
 	val updatedAt: String? = null
 )
 
-data class User(
+data class UserApplyment(
 
 	@field:SerializedName("resume")
 	val resume: Any? = null,

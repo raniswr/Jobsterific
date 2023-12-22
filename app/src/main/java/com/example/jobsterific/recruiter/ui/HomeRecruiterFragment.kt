@@ -1,6 +1,7 @@
 package com.example.jobsterific.recruiter.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +10,15 @@ import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.jobsterific.R
+import com.example.jobsterific.ViewModelFactoryProfile
 import com.example.jobsterific.databinding.FragmentHomeRecruiterBinding
 import com.example.jobsterific.recruiter.CourseRVModal
 import com.example.jobsterific.recruiter.adapter.SectionsPagerAdapter
+import com.example.jobsterific.recruiter.viewmodel.ProfileCompanyViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -36,7 +40,10 @@ class HomeRecruiterFragment : Fragment() {
     lateinit var courseRV: RecyclerView
 
     lateinit var courseList: ArrayList<CourseRVModal>
-
+    var token = ""
+    private val viewModel by viewModels<ProfileCompanyViewModel> {
+        ViewModelFactoryProfile.getInstance(requireContext(), token)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -59,7 +66,6 @@ class HomeRecruiterFragment : Fragment() {
             R.drawable.ic_flag,
             R.drawable.ic_candidates,
             R.drawable.ic_contender
-            // Add more icon resource IDs as needed
         )
 
         viewPager.isUserInputEnabled = false
@@ -68,10 +74,9 @@ class HomeRecruiterFragment : Fragment() {
             val iconImageView: ImageView = customView.findViewById(R.id.tab_icon)
             iconImageView.setImageResource(iconResIds[position])
 
-            // Set the text for each tab
+
             val titleTextView: TextView = customView.findViewById(R.id.tab_text)
             titleTextView.text = resources.getString(TAB_TITLES[position])
-
             tab.customView = customView
         }
 
@@ -79,7 +84,6 @@ class HomeRecruiterFragment : Fragment() {
 
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                // Disable smooth animation when moving between tabs
                 tab?.view?.setOnClickListener { viewPager.setCurrentItem(tab.position, false) }
             }
 
@@ -89,14 +93,22 @@ class HomeRecruiterFragment : Fragment() {
         })
 
 
-        val defaultPage = 1 // Assuming "candidate" is at index 1
+        val defaultPage = 1
         viewPager.setCurrentItem(defaultPage, false)
 
         val appCompatActivity = activity as? AppCompatActivity
         appCompatActivity?.supportActionBar?.elevation = 0f
+
+        viewModel.getSession().observe(this) { user ->
+            token = user.token
+            Log.d("ini token", token.toString())
+           binding?.name?.text = "Helo ${user.firstName}"
+        }
         return binding!!.root
 
     }
+
+
 
     companion object {
 

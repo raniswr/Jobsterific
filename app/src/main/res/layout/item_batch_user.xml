@@ -84,6 +84,7 @@
                 android:fontFamily="@font/abezee_regular"
                 android:ellipsize="end"
                 android:textSize="12sp"
+                android:maxLines="10"
                 android:text="We are looking for talented and motivated individuals who have the skills and experience in cloud computing and artificial intelligence to join our company. You will work on exciting projects that leverage Google Cloud, IBM AI, and other modern tools and frameworks to solve real-world problems and create value for our customers. You will also have the opportunity to learn from industry experts, collaborate with peers, and advance your career in the fast-growing field of cloud and AI. A.K.A Excerpt"
                 android:layout_marginStart="20dp"
                 app:layout_constraintTop_toBottomOf="@id/layoutBatch"

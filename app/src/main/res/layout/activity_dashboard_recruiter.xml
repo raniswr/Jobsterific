@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:elevation="8dp"
+        app:labelVisibilityMode="unlabeled"
         android:backgroundTint="@color/white"
         android:layout_alignParentBottom="true"
         android:background="@drawable/nav_background_curved"
@@ -26,6 +27,7 @@
         app:itemActiveIndicatorStyle="@color/white"
         android:scrollIndicators="left"
         android:clipChildren="false">
+
 
         <ImageView
             android:id="@+id/fab"
@@ -37,7 +39,6 @@
             android:layout_gravity="center"
             android:clickable="true"
             android:scaleType="centerInside" />
-
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 </RelativeLayout>

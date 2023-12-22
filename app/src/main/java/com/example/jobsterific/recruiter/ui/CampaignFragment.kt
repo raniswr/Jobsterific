@@ -1,5 +1,6 @@
 package com.example.jobsterific.recruiter.ui
 
+import ApiConfig
 import BatchAdapter
 import android.content.Intent
 import android.graphics.drawable.GradientDrawable
@@ -13,10 +14,19 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jobsterific.R
+import com.example.jobsterific.ViewModelFactoryProfile
+import com.example.jobsterific.data.response.BatchesItem
+import com.example.jobsterific.data.response.GetAllBatchResponse
 import com.example.jobsterific.databinding.FragmentCampaignBinding
-import com.example.jobsterific.recruiter.CourseRVModal
+import com.example.jobsterific.recruiter.viewmodel.ContenderViewModel
+import com.google.gson.Gson
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,9 +42,13 @@ class CampaignFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    var token = ""
     private var binding: FragmentCampaignBinding? = null
     val categories = listOf("All", "Tech Hiring", "UI/UX", "Category 3", "Category 4")
     private lateinit var batchAdapter: BatchAdapter
+    private val viewModel by viewModels<ContenderViewModel> {
+        ViewModelFactoryProfile.getInstance(requireContext(), token)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,35 +63,54 @@ class CampaignFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+//        binding = FragmentCampaignBinding.inflate(inflater, container, false)
+//        val layoutManager = LinearLayoutManager(requireContext())
+//        binding!!.idRVBatch.layoutManager = layoutManager
+//        val itemDecoration = DividerItemDecoration(requireContext(), layoutManager.orientation)
+//        binding!!.idRVBatch.addItemDecoration(itemDecoration)
+//        viewModel.getSession().observe(this) { user ->
+//            token = user.token
+//            Log.d("token inih", token.toString())
+//            getBatch(token)
+//        }
+//
+//        binding?.idRVBatch?.adapter = batchAdapter
+//
+//
+////        batchAdapter.onItemClick = { clickedCourse ->
+////            val intent = Intent(requireContext(), DetailPageBatchCompanyActivity::class.java)
+////            startActivity(intent)
+////        }
+//
+//
+//        val categoryContainer: LinearLayout = binding!!.categoryContainer
+//
+//        for (category in categories) {
+//            for (category in categories) {
+//                addCategoryButton( category, isActive = false)
+//            }
+//        }
+//
+//        return binding!!.root
         binding = FragmentCampaignBinding.inflate(inflater, container, false)
-        val batchRV = binding!!.idRVBatch
-        val batchList = getCompanyData() // Assuming you have a function to get company data
-        val batchLayoutManager = LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding!!.idRVBatch.layoutManager = layoutManager
+        val itemDecoration = DividerItemDecoration(requireContext(), layoutManager.orientation)
+        binding!!.idRVBatch.addItemDecoration(itemDecoration)
+        viewModel.getSession().observe(this) { user ->
+            token = user.token
+            Log.d("token inih", token.toString())
+            getBatch(token)
+        }
 
-        batchRV.layoutManager = batchLayoutManager
-        batchAdapter = BatchAdapter(batchList, context)
-        batchRV.adapter = batchAdapter
-
+        // Initialize batchAdapter here
+        batchAdapter = BatchAdapter(emptyList(), requireContext())
 
         binding?.idRVBatch?.adapter = batchAdapter
 
-
-        batchAdapter.onItemClick = { clickedCourse ->
-            val intent = Intent(requireContext(), DetailPageBatchCompanyActivity::class.java)
-            startActivity(intent)
-        }
-
-
-        val categoryContainer: LinearLayout = binding!!.categoryContainer
-
         for (category in categories) {
-            for (category in categories) {
-                addCategoryButton( category, isActive = false)
-            }
+            addCategoryButton(category, isActive = false)
         }
-
-
 
         return binding!!.root
     }
@@ -101,15 +134,15 @@ class CampaignFragment : Fragment() {
         updateButtonColor(categoryButton, isActive)
 
 
-        categoryButton.setOnClickListener {
-            setActiveCategory(categoryButton.id)
-            Log.d("BatchAdapter", "Clicked category: $categoryName")
-            if (categoryName == "All") {
-                 batchAdapter.showAll()
-            } else {
-                batchAdapter.filter(categoryName)
-            }
-        }
+//        categoryButton.setOnClickListener {
+//            setActiveCategory(categoryButton.id)
+//            Log.d("BatchAdapter", "Clicked category: $categoryName")
+//            if (categoryName == "All") {
+//                 batchAdapter.showAll()
+//            } else {
+//                batchAdapter.filter(categoryName)
+//            }
+//        }
 
         val categoryContainer: LinearLayout = binding?.categoryContainer ?: return
         categoryContainer.addView(categoryButton)
@@ -149,11 +182,45 @@ class CampaignFragment : Fragment() {
 
     }
 
-    private fun getCompanyData(): ArrayList<CourseRVModal> {
-        val companyList = ArrayList<CourseRVModal>()
-        companyList.add(CourseRVModal("UI/UX Hiring Batch"))
-        companyList.add(CourseRVModal("Tech Hiring Batch"))
-        return companyList
+
+
+    private fun getBatch(token: String) {
+
+        val client = ApiConfig.getApiService2(token = token).getAllBatch()
+        client.enqueue(object : Callback<GetAllBatchResponse> {
+            override fun onResponse(
+                call: Call<GetAllBatchResponse>,
+                response: Response<GetAllBatchResponse>
+            ) {
+                val responseBody = response.body()
+
+                if (responseBody != null) {
+                    setUserData(responseBody.batches)
+                }
+
+            }
+            override fun onFailure(call: Call<GetAllBatchResponse>, t: Throwable) {
+
+            }
+        })
+
+
+    }
+
+
+
+    private var dataUsers: List<BatchesItem> = emptyList()
+    private fun setUserData(itemUser: List<BatchesItem>) {
+        val adapter = BatchAdapter(dataUsers,requireContext())
+        adapter.submitList(itemUser)
+        binding!!.idRVBatch.adapter = adapter
+        dataUsers = itemUser
+
+        adapter.onItemClick = {
+            val intent = Intent(requireContext(), DetailPageBatchCompanyActivity::class.java)
+            intent.putExtra("detailUser", Gson().toJson(it))
+            startActivity(intent)
+        }
     }
 
     companion object {

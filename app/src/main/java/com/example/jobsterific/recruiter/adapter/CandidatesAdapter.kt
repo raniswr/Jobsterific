@@ -2,43 +2,54 @@ package com.example.jobsterific.recruiter.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.jobsterific.R
-import com.example.jobsterific.recruiter.CourseRVModal
+import com.example.jobsterific.data.response.RecommendationsItem
+import com.example.jobsterific.databinding.ItemCandidatesCompanyBinding
 
-class CandidatesAdapter(
-    private val courseList: ArrayList<CourseRVModal>,
-    private val context: Context? = null
-) : RecyclerView.Adapter<CandidatesAdapter.CandidatesViewHolder>() {
-    var onItemClick: ((CourseRVModal) -> Unit)? = null
+class CandidatesAdapter(private val dataList: List<RecommendationsItem?>?, var context : Context): ListAdapter<RecommendationsItem, CandidatesAdapter.MyViewHolder>(CandidatesAdapter.DIFF_CALLBACK) {
+    var onItemClick: ((RecommendationsItem?) -> Unit)? = null
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): CandidatesViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.item_candidates_company,
-            parent, false
-        )
-        return CandidatesViewHolder(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CandidatesAdapter.MyViewHolder {
+        val binding =  ItemCandidatesCompanyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(binding)
     }
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val login = getItem(position)
+        holder.bind(login)
+        holder.itemView.setOnClickListener{
+            onItemClick?.invoke(login)
+        }
+    }
+    class MyViewHolder(val binding: ItemCandidatesCompanyBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(review: RecommendationsItem){
+            binding.name
+                .text = " ${review.firstName} ${review.lastName}"
+            binding.job
+                .text = "${review.job}"
+            binding.email
+                .text = " ${review.email}"
+            binding.adress
+                .text = " ${review.address}"
 
-    override fun onBindViewHolder(holder: CandidatesViewHolder, position: Int) {
-        val currentCourse = courseList[position]
-        holder.courseNameTV.text = currentCourse.courseName
-        holder.itemView.setOnClickListener {
-            onItemClick?.invoke(currentCourse)
+
         }
     }
 
-    override fun getItemCount(): Int {
-        return courseList.size
-    }
 
-    class CandidatesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val courseNameTV: TextView = itemView.findViewById(R.id.name)
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<RecommendationsItem>() {
+            override fun areItemsTheSame(oldItem: RecommendationsItem, newItem: RecommendationsItem): Boolean {
+                return oldItem == newItem
+            }
+            override fun areContentsTheSame(oldItem: RecommendationsItem, newItem: RecommendationsItem): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 }
+
+
+

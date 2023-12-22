@@ -8,10 +8,10 @@ data class EditCompanyProfileResponse(
 	val message: String? = null,
 
 	@field:SerializedName("customer")
-	val customer: Customer? = null
+	val customer: CustomerEdit? = null
 )
 
-data class Customer(
+data class CustomerEdit(
 
 	@field:SerializedName("resume")
 	val resume: Any? = null,

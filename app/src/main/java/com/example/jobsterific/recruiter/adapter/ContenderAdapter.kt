@@ -1,46 +1,59 @@
-package com.example.jobsterific.recruiter.adapter
-
-
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.jobsterific.R
-import com.example.jobsterific.recruiter.CourseRVModal
+import com.bumptech.glide.Glide
+import com.example.jobsterific.data.response.GetAllUserResponseItem
+import com.example.jobsterific.databinding.ItemContenderBinding
 
-class ContenderAdapter(
-    private val courseList: ArrayList<CourseRVModal>,
-    private val context: Context? = null
-) : RecyclerView.Adapter<ContenderAdapter.ContenderViewHolder>() {
+class ContenderAdapter(private val dataList: List<GetAllUserResponseItem>) :
+    ListAdapter<GetAllUserResponseItem, ContenderAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
-    var onItemClick: ((CourseRVModal) -> Unit)? = null
+    var onItemClick: ((GetAllUserResponseItem?) -> Unit)? = null
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ContenderViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.item_contender,
-            parent, false
-        )
-        return ContenderViewHolder(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        val binding = ItemContenderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ContenderViewHolder, position: Int) {
-        val currentCourse = courseList[position]
-        holder.courseNameTV.text = currentCourse.courseName
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val user = getItem(position)
+        holder.bind(user)
         holder.itemView.setOnClickListener {
-            onItemClick?.invoke(currentCourse)
+            onItemClick?.invoke(user)
         }
     }
 
     override fun getItemCount(): Int {
-        return courseList.size
+        return dataList.filter { it.isCustomer == false}.size
     }
 
-    class ContenderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val courseNameTV: TextView = itemView.findViewById(R.id.name)
+    override fun getItem(position: Int): GetAllUserResponseItem {
+        return dataList.filter { it.isCustomer == false }[position]
+    }
+
+    class MyViewHolder(val binding: ItemContenderBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(user: GetAllUserResponseItem) {
+            binding.name.text = "${user.firstName}"
+            binding.job.text = "${user.job}"
+            binding.email.text = "${user.email}"
+            binding.adress.text = "${user.address}"
+            Glide.with(binding.image)
+                .load("${user.profile}")
+                .into(binding.image)
+        }
+    }
+
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<GetAllUserResponseItem>() {
+            override fun areItemsTheSame(oldItem: GetAllUserResponseItem, newItem: GetAllUserResponseItem): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(oldItem: GetAllUserResponseItem, newItem: GetAllUserResponseItem): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 }

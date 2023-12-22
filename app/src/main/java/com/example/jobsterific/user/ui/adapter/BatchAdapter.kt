@@ -1,59 +1,54 @@
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.jobsterific.R
-import com.example.jobsterific.recruiter.CourseRVModal
+import com.example.jobsterific.data.response.BatchesItem
+import com.example.jobsterific.databinding.ItemBatchUserBinding
 
-class BatchAdapter(
-    private val courseList: ArrayList<CourseRVModal>,
-    private val context: Context? = null
-) : RecyclerView.Adapter<BatchAdapter.BatchViewHolder>() {
-    private var filteredCourseList = courseList.toList()
 
-    var onItemClick: ((CourseRVModal) -> Unit)? = null
+class BatchAdapter(private val dataList: List<BatchesItem?>?, var context : Context): ListAdapter<BatchesItem,BatchAdapter.MyViewHolder>(BatchAdapter.DIFF_CALLBACK) {
+    var onItemClick: ((BatchesItem?) -> Unit)? = null
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): BatchViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.item_batch_user,
-            parent, false
-        )
-        return BatchViewHolder(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BatchAdapter.MyViewHolder {
+        val binding = ItemBatchUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(binding)
     }
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val login = getItem(position)
+        holder.bind(login)
+        holder.itemView.setOnClickListener{
+            onItemClick?.invoke(login)
+        }
+    }
+    class MyViewHolder(val binding: ItemBatchUserBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(review: BatchesItem){
+            binding.nameBatch
+                .text = " ${review.campaignName}"
+            binding.period
+                .text = "${review.startDate} - ${review.endDate}"
+            binding.description
+                .text = " ${review.campaignDesc}"
+            binding.job
+                .text = " ${review.campaignKeyword}"
 
-    override fun onBindViewHolder(holder: BatchViewHolder, position: Int) {
-        val currentCourse = filteredCourseList[position]
-        Log.d("BatchAdapter", "Binding data: ${currentCourse.courseName}")
-        holder.courseNameTV.text = currentCourse.courseName
-        holder.itemView.setOnClickListener {
-            onItemClick?.invoke(currentCourse)
+
         }
     }
 
-    override fun getItemCount(): Int {
-        return filteredCourseList.size
-    }
 
-    class BatchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val courseNameTV: TextView = itemView.findViewById(R.id.nameBatch)
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BatchesItem>() {
+            override fun areItemsTheSame(oldItem: BatchesItem, newItem:BatchesItem): Boolean {
+                return oldItem == newItem
+            }
+            override fun areContentsTheSame(oldItem:BatchesItem, newItem: BatchesItem): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
-    fun showAll() {
-        filteredCourseList = courseList.toList()
-        notifyDataSetChanged()
-
-    }
-    fun filter(query: String) {
-        Log.d("BatchAdapter", "Before filtering: $courseList")
-        filteredCourseList = courseList.filter { it.courseName.contains(query, ignoreCase = true) }
-        notifyDataSetChanged()
-        Log.d("BatchAdapter", "Filtering with query: $query, Result: $filteredCourseList")
-    }
-
 }
+
+

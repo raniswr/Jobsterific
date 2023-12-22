@@ -1,5 +1,6 @@
 package com.example.jobsterific.recruiter.ui
 
+import ApiConfig
 import android.Manifest
 import android.app.DownloadManager
 import android.content.Context
@@ -10,21 +11,39 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.ContactsContract
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.jobsterific.R
+import com.example.jobsterific.ViewModelFactoryProfile
+import com.example.jobsterific.data.response.DetailUserResponse
+import com.example.jobsterific.data.response.RecommendationsItem
 import com.example.jobsterific.databinding.ActivityDetailCandidatesBinding
+import com.example.jobsterific.recruiter.viewmodel.ProfileCompanyViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DetailCandidatesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailCandidatesBinding
+    var getData: RecommendationsItem? = null
+    var token = ""
+    var pdfUrl = ""
+    private val viewModel by viewModels<ProfileCompanyViewModel> {
+        ViewModelFactoryProfile.getInstance(applicationContext, token)
+    }
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
+                // Permission granted, you can now send the email
                 sendEmail()
             } else {
+                // Permission denied, show a message or open app settings
                 showSnackbarWithSettings()
             }
         }
@@ -32,11 +51,41 @@ class DetailCandidatesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailCandidatesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val gson = Gson()
+        val extras = intent?.extras
+        getData  =  gson.fromJson(extras?.getString("detailUser"), RecommendationsItem::class.java)
+
+        binding.nameTextView
+            .text = "${getData?.firstName} ${getData?.lastName}"
+        binding.adress
+            .text = "${getData?.address}"
+        binding.email
+            .text = getData?.email
+
+        if(getData?.status == true){
+            binding.statusCandidate
+                .text = "Hired"
+        }
+        binding.job
+            .text = getData?.job
+
+
+
+
+        viewModel.getSession().observe(this) { user ->
+            token = user.token
+            Log.d("ini token", token.toString())
+            getDetailUser(token = token, getData?.userId.toString())
+
+        }
+
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+
         setSupportActionBar(toolbar)
 
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
@@ -46,18 +95,20 @@ class DetailCandidatesActivity : AppCompatActivity() {
                     Manifest.permission.INTERNET
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
+                // Permission already granted, send the email
                 sendEmail()
             } else {
+                // Permission not granted, request it
                 requestPermissionLauncher.launch(Manifest.permission.INTERNET)
             }
 
         }
 
         binding.button2.setOnClickListener(View.OnClickListener {
-            val pdfUrl = "https://www.bikincv.com/blog/wp-content/uploads/2021/02/modern-moon-mist.jpg"
 
+//            getData?.user?.resume
             val request = DownloadManager.Request(Uri.parse(pdfUrl))
-                .setTitle("Your PDF Title")
+                .setTitle("Resume")
                 .setDescription("Downloading PDF...")
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
                 .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "modern-moon-mist.jpg")
@@ -78,6 +129,8 @@ class DetailCandidatesActivity : AppCompatActivity() {
             startActivity(intent)
         })
     }
+
+
     private fun sendEmail() {
         // Replace the placeholders with your email details
         val emailIntent = Intent(Intent.ACTION_SEND).apply {
@@ -117,4 +170,34 @@ class DetailCandidatesActivity : AppCompatActivity() {
         intent.data = uri
         startActivity(intent)
     }
+
+    fun getDetailUser(token: String,userId : String ) {
+        try {
+            val call: Call<DetailUserResponse> = ApiConfig.getApiService2(token).getDetailUser(userId)
+            call.enqueue(object : Callback<DetailUserResponse> {
+                override fun onResponse(
+                    call: Call<DetailUserResponse>,
+                    response: Response<DetailUserResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val detailUserResponse = response.body()
+                        if (detailUserResponse != null) {
+                            val resume = detailUserResponse.resume
+                            if (resume != null && resume.startsWith("http")) {
+                                pdfUrl = resume
+                                Log.d("pdf url", pdfUrl)
+                                // Proceed with the rest of your code
+                            } else {
+                                // Handle the case where resume is null or doesn't start with "http"
+                            }}
+                    }
+                }
+                override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
+                }
+            })
+        } catch (e: Exception) {
+            // Handle exception if needed
+        }
+    }
+
 }

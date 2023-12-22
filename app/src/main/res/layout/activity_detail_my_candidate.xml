@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <RelativeLayout
@@ -25,7 +26,7 @@
                 app:titleTextColor="@color/black"
                 app:subtitleTextAppearance="@font/abezee_regular"
 
-                app:title="Tech Hiring Batch"/>
+                app:title=""/>
 
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -291,20 +292,20 @@
                     android:fontFamily="@font/abezee_regular"
                     app:cornerRadius="10dp" />
             </LinearLayout>
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonDelete"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Delete from list"
-                android:layout_marginHorizontal="30dp"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/red"
-                app:strokeColor="@color/buttonOutline"
-                android:textSize="14dp"
-                android:fontFamily="@font/abezee_regular"
-                android:inputType="text|textNoSuggestions"
-                app:cornerRadius="10dp" />
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/buttonDelete"-->
+<!--                style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:text="Delete from list"-->
+<!--                android:layout_marginHorizontal="30dp"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:backgroundTint="@color/red"-->
+<!--                app:strokeColor="@color/buttonOutline"-->
+<!--                android:textSize="14dp"-->
+<!--                android:fontFamily="@font/abezee_regular"-->
+<!--                android:inputType="text|textNoSuggestions"-->
+<!--                app:cornerRadius="10dp" />-->
         </LinearLayout>
 
     </RelativeLayout>

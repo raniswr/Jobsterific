@@ -10,14 +10,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.jobsterific.R
-import com.example.jobsterific.databinding.ActivityApplymentBatchBinding
 import com.example.jobsterific.ViewModelFactory
+import com.example.jobsterific.databinding.ActivityApplymentBatchBinding
 import com.example.jobsterific.user.viewmodel.UploadViewModel
 
 class ApplymentBatchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityApplymentBatchBinding
+    val token = ""
     private val viewModel by viewModels<UploadViewModel> {
-        ViewModelFactory.getInstance(this)
+        ViewModelFactory.getInstance(this, token)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

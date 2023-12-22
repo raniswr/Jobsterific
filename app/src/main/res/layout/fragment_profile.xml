@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 <FrameLayout
     android:layout_width="match_parent"
@@ -33,7 +34,6 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/action_image"
                 android:layout_width="120dp"
-                android:layout_marginLeft="15dp"
                 android:layout_height="120dp"
                 android:padding="10dp"
                 app:cardCornerRadius="60dp"
@@ -57,24 +57,21 @@
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:fontFamily="@font/abezee_regular"
-                android:text="Samuel Zakaria"
+                android:gravity="center_horizontal"
+                android:paddingTop="8dp"
+
+
+                android:paddingBottom="8dp"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 android:textColor="@color/black"
                 android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/action_image"
-               android:gravity="center_horizontal"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 tools:ignore="MissingConstraints" />
-
-
-
-
-
-
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <LinearLayout
@@ -103,7 +100,7 @@
                 android:layout_weight="1"
                 app:layout_constraintTop_toBottomOf="@id/companyName"
                 android:fontFamily="@font/abezee_regular"
-                android:text="Unhired"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:paddingBottom="8dp"
@@ -145,7 +142,7 @@
                 android:id="@+id/Username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Samuel Zakaria"
+                android:text=""
                 android:textSize="12sp"
                 android:textColor="@color/lightBlack"
                 android:fontFamily="@font/abezee_regular"
@@ -172,7 +169,7 @@
                 android:id="@+id/number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0819373737909"
+                android:text=""
                 android:fontFamily="@font/abezee_regular"
                 android:textSize="12sp"
                 android:textColor="@color/lightBlack"
@@ -196,7 +193,7 @@
                 android:id="@+id/job"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Profesional Cloud Computing "
+                android:text=""
                 android:textSize="12sp"
                 android:textColor="@color/lightBlack"
                 android:fontFamily="@font/abezee_regular"
@@ -221,7 +218,7 @@
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="samuelzakaria28@gmail.com"
+                android:text=""
                 android:textSize="12sp"
                 android:textColor="@color/lightBlack"
                 android:fontFamily="@font/abezee_regular"
@@ -246,7 +243,7 @@
                 android:id="@+id/adress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jl. Halat No.8, Ps. Merah Bar., Kec. Medan Kota, Kota Medan, Sumatera Utara 20211"
+                android:text=""
                 android:textSize="12sp"
                 android:textColor="@color/lightBlack"
                 android:fontFamily="@font/abezee_regular"
@@ -287,7 +284,7 @@
                 android:id="@+id/statusResume"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MyReseume.pdf"
+                android:text=""
                 android:textSize="12sp"
                 android:textColor="@color/lightBlack"
                 android:fontFamily="@font/abezee_regular"
@@ -306,7 +303,7 @@
                 app:layout_constraintStart_toEndOf="@id/statusResume"
                 app:layout_constraintTop_toTopOf="@id/iconResume"
                 app:tint="@color/black"
-                android:layout_marginStart="110dp"
+                android:layout_marginStart="50dp"
                />
 
             <TextView

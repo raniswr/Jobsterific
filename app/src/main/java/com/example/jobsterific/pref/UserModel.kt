@@ -6,14 +6,16 @@ data class UserModel(
     val firstName: String,
     val lastName: String,
     val email: String,
-    val phone: Int,
+    val password: String,
+    val phone: Int?,
     val profile: String,
+    val sex: String,
+    val status:  Boolean = false,
     val job: String,
     val adress: String,
     val website: String,
     val description: String,
     val isLogin: Boolean = false,
-    val isAdmin: Boolean = false,
-    val isUser: Boolean = false,
-    val isCostumer: Boolean = false
+    val isAdmin: Boolean? = false,
+    val isCostumer: Boolean? = false
 )

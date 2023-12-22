@@ -1,14 +1,14 @@
-package com.example.jobsterific.data
+package com.example.jobsterific.data.response
 
 import com.google.gson.annotations.SerializedName
 
 data class ProfileCompanyResponse(
 
 	@field:SerializedName("customer")
-	val customer: Customer? = null
+	val customer: CustomerProfile? = null
 )
 
-data class Customer(
+data class CustomerProfile(
 
 	@field:SerializedName("resume")
 	val resume: Any? = null,

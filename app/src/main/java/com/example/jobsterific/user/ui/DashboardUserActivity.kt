@@ -1,8 +1,8 @@
 package com.example.jobsterific.user.ui
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.jobsterific.R
 import com.example.jobsterific.databinding.ActivityDashboardUserBinding
@@ -17,9 +17,11 @@ class DashboardUserActivity : AppCompatActivity() {
         binding = ActivityDashboardUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
-        binding?.fab?.setOnClickListener {
-            val intent = Intent(this, UploadResumeActivity::class.java)
-            startActivity(intent)
+
+        var  fab = binding.fab
+        fab.setOnClickListener { loadFragment(UploadResumeFragment())
+            fab.backgroundTintList = ContextCompat.getColorStateList(this, R.color.blue)
+            bottomNav.selectedItemId = com.example.jobsterific.R.id.upload
         }
         loadFragment(HomeFragment())
         bottomNav = findViewById(R.id.bottomNav) as BottomNavigationView
@@ -27,10 +29,17 @@ class DashboardUserActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.home -> {
                     loadFragment(HomeFragment())
+                    fab.backgroundTintList = ContextCompat.getColorStateList(this, R.color.black)
+                    true
+                }
+                R.id.upload -> {
+                    loadFragment(UploadResumeFragment())
+                    fab.backgroundTintList = ContextCompat.getColorStateList(this, R.color.blue)
                     true
                 }
                 R.id.profile -> {
                     loadFragment(ProfileFragment())
+                    fab.backgroundTintList = ContextCompat.getColorStateList(this, R.color.black)
                     true
                 }
 
@@ -45,4 +54,5 @@ class DashboardUserActivity : AppCompatActivity() {
         transaction.replace(R.id.container,fragment)
         transaction.commit()
     }
+
 }

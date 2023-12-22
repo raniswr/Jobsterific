@@ -1,8 +1,10 @@
 package com.example.jobsterific.recruiter.ui
 
+import ApiConfig
 import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +13,21 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jobsterific.R
+import com.example.jobsterific.ViewModelFactoryProfile
+import com.example.jobsterific.data.response.GetAllCandidateResponse
+import com.example.jobsterific.data.response.RecommendationsItem
 import com.example.jobsterific.databinding.FragmentCandidatesBinding
 import com.example.jobsterific.recruiter.CourseRVModal
 import com.example.jobsterific.recruiter.adapter.CandidatesAdapter
+import com.example.jobsterific.recruiter.viewmodel.ContenderViewModel
+import com.google.gson.Gson
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,6 +44,11 @@ class CandidatesFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var binding: FragmentCandidatesBinding? = null
+    private lateinit var batchAdapter: CandidatesAdapter
+    var token = ""
+    private val viewModel by viewModels<ContenderViewModel> {
+        ViewModelFactoryProfile.getInstance(requireContext(), token)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,28 +62,31 @@ class CandidatesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentCandidatesBinding.inflate(inflater, container, false)
-        val candidatesRV = binding!!.idRVCandidates
-        val candidatesList = getCandidatesData() // Assuming you have a function to get company data
-        val batchLayoutManager = LinearLayoutManager(context)
 
-        candidatesRV.layoutManager = batchLayoutManager
-        val candidatesAdapter = CandidatesAdapter(candidatesList, context)
-        candidatesRV.adapter = candidatesAdapter
-        binding?.idRVCandidates?.adapter = candidatesAdapter
+//        val categoryContainer: LinearLayout = binding!!.categoryContainer
+//        val categories = listOf("Category 1", "Category 2", "Category 3", "Category 4")
+//        for (category in categories) {
+//            for (category in categories) {
+//                addCategoryButton( category, isActive = false)
+//            }
+//        }
 
-        candidatesAdapter.onItemClick = { clickedCourse ->
-            val intent = Intent(requireContext(), DetailCandidatesActivity::class.java)
-            startActivity(intent)
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding!!.idRVCandidates
+            .layoutManager = layoutManager
+        val itemDecoration = DividerItemDecoration(requireContext(), layoutManager.orientation)
+        binding!!.idRVCandidates.addItemDecoration(itemDecoration)
+        viewModel.getSession().observe(this) { user ->
+            token = user.token
+            Log.d("token inih", token.toString())
+            getCandidate(token)
         }
-        val categoryContainer: LinearLayout = binding!!.categoryContainer
-        val categories = listOf("Category 1", "Category 2", "Category 3", "Category 4")
-        for (category in categories) {
-            for (category in categories) {
-                addCategoryButton( category, isActive = false)
-            }
-        }
+
+        batchAdapter = CandidatesAdapter(emptyList(),requireContext())
+
+
+        binding?.idRVCandidates?.adapter = batchAdapter
         return binding!!.root
 
     }
@@ -93,57 +113,86 @@ class CandidatesFragment : Fragment() {
             setActiveCategory(categoryButton.id)
         }
 
-        val categoryContainer: LinearLayout = binding?.categoryContainer ?: return
-        categoryContainer.addView(categoryButton)
+//        val categoryContainer: LinearLayout = binding?.categoryContainer ?: return
+//        categoryContainer.addView(categoryButton)
     }
 
     private fun setActiveCategory(buttonId: Int) {
-        val categoryContainer: LinearLayout = binding!!.categoryContainer
-
-        for (i in 0 until categoryContainer.childCount) {
-            val child = categoryContainer.getChildAt(i) as Button
-            val isActive = child.id == buttonId
-            updateButtonColor(child, isActive)
-        }
+//        val categoryContainer: LinearLayout = binding!!.categoryContainer
+//
+//        for (i in 0 until categoryContainer.childCount) {
+//            val child = categoryContainer.getChildAt(i) as Button
+//            val isActive = child.id == buttonId
+//            updateButtonColor(child, isActive)
+//        }
     }
 
     private fun updateButtonColor(button: Button, isActive: Boolean) {
-        // Set background color based on the active state
         val backgroundColor = if (isActive) {
-            // Set the color for the active button
             ContextCompat.getColor(requireContext(), R.color.black)
         } else {
-            // Set the color for the inactive button
             ContextCompat.getColor(requireContext(), R.color.white)
         }
         val textColor = if (isActive) {
-            // Set the color for the active button
             ContextCompat.getColor(requireContext(), R.color.white)
         } else {
-            // Set the color for the inactive button
             ContextCompat.getColor(requireContext(), R.color.black)
         }
         val cornerRadius = resources.getDimensionPixelSize(R.dimen.button_corner_radius).toFloat()
 
-        // Create a rounded shape drawable
         val shapeDrawable = GradientDrawable()
         shapeDrawable.setColor(backgroundColor)
         shapeDrawable.cornerRadius = cornerRadius
 
-        // Set the drawable as the background
         button.background = shapeDrawable
         button.setTextColor(textColor)
         val typeface = ResourcesCompat.getFont(requireContext(), R.font.abezee_regular)
         button.typeface = typeface
 
     }
+    private fun getCandidate(token: String) {
 
+        val client = ApiConfig.getApiService2(token = token).getAllCandidateCompany()
+        client.enqueue(object : Callback<GetAllCandidateResponse> {
+            override fun onResponse(
+                call: Call<GetAllCandidateResponse>,
+                response: Response<GetAllCandidateResponse>
+            ) {
+                val responseBody = response.body()
+
+
+                if (responseBody != null) {
+                    setUserData(responseBody.recommendations)
+                }
+
+            }
+            override fun onFailure(call: Call<GetAllCandidateResponse>, t: Throwable) {
+
+            }
+        })
+
+
+    }
+
+
+
+    private var dataUsers: List<RecommendationsItem?>? = emptyList()
+    private fun setUserData(itemUser: List<RecommendationsItem?>?) {
+        val adapter = CandidatesAdapter(dataUsers,requireContext())
+        adapter.submitList(itemUser)
+        binding!!.idRVCandidates.adapter = adapter
+        dataUsers = itemUser
+
+        adapter.onItemClick = {
+            val intent = Intent(requireContext(), DetailCandidatesActivity::class.java)
+            intent.putExtra("detailUser", Gson().toJson(it))
+            startActivity(intent)
+        }
+    }
     private fun getCandidatesData(): ArrayList<CourseRVModal> {
         val candidatesList = ArrayList<CourseRVModal>()
-        // Add your company data here
         candidatesList.add(CourseRVModal("Samuel Zakaria H"))
         candidatesList.add(CourseRVModal("Rani Prabaswari"))
-        // Add more companies as needed
         return candidatesList
     }
 

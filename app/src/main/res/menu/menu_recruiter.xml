@@ -6,9 +6,11 @@
         android:title=""  />
     <item
         android:id="@+id/arsip"
+        android:icon="@drawable/ic"
         android:title="" />
     <item
         android:id="@+id/profile"
         android:icon="@drawable/ic_profile"
         android:title="" />
+
 </menu>

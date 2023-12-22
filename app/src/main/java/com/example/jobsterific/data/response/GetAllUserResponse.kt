@@ -65,5 +65,8 @@ data class GetAllUserResponseItem(
 	val status: Boolean? = null,
 
 	@field:SerializedName("updatedAt")
-	val updatedAt: String? = null
+	val updatedAt: String? = null,
+
+
+
 )

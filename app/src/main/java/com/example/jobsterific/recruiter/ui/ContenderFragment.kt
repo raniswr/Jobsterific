@@ -1,7 +1,11 @@
 package com.example.jobsterific.recruiter.ui
 
+import ApiConfig
+import ContenderAdapter
+import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +14,20 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jobsterific.R
+import com.example.jobsterific.ViewModelFactoryProfile
+import com.example.jobsterific.data.response.GetAllUserResponseItem
 import com.example.jobsterific.databinding.FragmentContenderBinding
 import com.example.jobsterific.recruiter.CourseRVModal
-import com.example.jobsterific.recruiter.adapter.ContenderAdapter
+import com.example.jobsterific.recruiter.viewmodel.ContenderViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
@@ -30,8 +40,12 @@ class ContenderFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    var token = ""
+    private lateinit var contenderAdapter: ContenderAdapter
     private var binding: FragmentContenderBinding? = null
+    private val viewModel by viewModels<ContenderViewModel> {
+        ViewModelFactoryProfile.getInstance(requireContext(), token)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -45,24 +59,30 @@ class ContenderFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentContenderBinding.inflate(inflater, container, false)
-        val  contenderRV = binding!!.idRVContender
-        val  contenderList = getContenderData() // Assuming you have a function to get company data
-        val  contenderLayoutManager = LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding!!.idRVContender.layoutManager = layoutManager
 
-        contenderRV.layoutManager =  contenderLayoutManager
-        val  contenderAdapter =  ContenderAdapter( contenderList, context)
-        contenderRV.adapter =  contenderAdapter
-        binding?.idRVContender?.adapter =  contenderAdapter
-
+        val itemDecoration = DividerItemDecoration(requireContext(), layoutManager.orientation)
+        binding!!.idRVContender.addItemDecoration(itemDecoration)
+        getContender(token)
 
         val categoryContainer: LinearLayout = binding!!.categoryContainer
-        val categories = listOf("Category 1", "Category 2", "Category 3", "Category 4")
+        val categories = listOf("Cloud", "Mobile", "Machine Learning", "Developer")
+
+        contenderAdapter = ContenderAdapter(emptyList())
+
         for (category in categories) {
-            for (category in categories) {
-                addCategoryButton( category, isActive = false)
-            }
+            addCategoryButton(category, isActive = false)
         }
-        return binding!!.root
+
+
+    viewModel.getSession().observe(this) { user ->
+            token = user.token
+            Log.d("token inih", token.toString())
+
+            }
+
+            return binding!!.root
     }
 
     private fun addCategoryButton(categoryName: String, isActive: Boolean) {
@@ -85,6 +105,7 @@ class ContenderFragment : Fragment() {
 
         categoryButton.setOnClickListener {
             setActiveCategory(categoryButton.id)
+//            contenderAdapter.filterByCategory(categoryName)
         }
 
         val categoryContainer: LinearLayout = binding?.categoryContainer ?: return
@@ -102,29 +123,22 @@ class ContenderFragment : Fragment() {
     }
 
     private fun updateButtonColor(button: Button, isActive: Boolean) {
-        // Set background color based on the active state
         val backgroundColor = if (isActive) {
-            // Set the color for the active button
             ContextCompat.getColor(requireContext(), R.color.black)
         } else {
-            // Set the color for the inactive button
             ContextCompat.getColor(requireContext(), R.color.white)
         }
         val textColor = if (isActive) {
-            // Set the color for the active button
             ContextCompat.getColor(requireContext(), R.color.white)
         } else {
-            // Set the color for the inactive button
             ContextCompat.getColor(requireContext(), R.color.black)
         }
         val cornerRadius = resources.getDimensionPixelSize(R.dimen.button_corner_radius).toFloat()
 
-        // Create a rounded shape drawable
         val shapeDrawable = GradientDrawable()
         shapeDrawable.setColor(backgroundColor)
         shapeDrawable.cornerRadius = cornerRadius
 
-        // Set the drawable as the background
         button.background = shapeDrawable
         button.setTextColor(textColor)
         val typeface = ResourcesCompat.getFont(requireContext(), R.font.abezee_regular)
@@ -134,14 +148,45 @@ class ContenderFragment : Fragment() {
 
     private fun getContenderData(): ArrayList<CourseRVModal> {
         val candidatesList = ArrayList<CourseRVModal>()
-        // Add your company data here
+
         candidatesList.add(CourseRVModal("A.A Rani Prabaswari Dewi"))
         candidatesList.add(CourseRVModal("A.A Rani Prabaswari Dewi"))
-        // Add more companies as needed
+
         return candidatesList
     }
 
+    private fun getContender(token: String) {
+        val client = ApiConfig.getApiService3(token).getAllUser()
+        client.enqueue(object : Callback<List<GetAllUserResponseItem>> {
+            override fun onResponse(
+                call: Call<List<GetAllUserResponseItem>>,
+                response: Response<List<GetAllUserResponseItem>>
+            ) {
 
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+
+                        setUserData(responseBody, context)
+                    }
+                } else {
+
+                }
+            }
+            override fun onFailure(call: Call<List<GetAllUserResponseItem>>, t: Throwable) {
+//                binding.progressBar.visibility = View.INVISIBLE
+            }
+        })
+    }
+    private var dataUsers: List<GetAllUserResponseItem?>? = null
+    private fun setUserData(itemUser: List<GetAllUserResponseItem>, context: Context?) {
+
+        val adapter =ContenderAdapter( itemUser)
+        adapter.submitList(itemUser)
+        binding?.idRVContender?.adapter = adapter
+        dataUsers = itemUser
+
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of

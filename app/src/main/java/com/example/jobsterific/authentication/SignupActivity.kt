@@ -7,10 +7,12 @@ import com.example.jobsterific.databinding.ActivitySignupBinding
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySignupBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         binding?.button1?.setOnClickListener {
             val intent = Intent(this,SignupUserActivity::class.java)
             startActivity(intent)

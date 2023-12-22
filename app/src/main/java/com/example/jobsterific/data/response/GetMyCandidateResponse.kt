@@ -23,7 +23,7 @@ data class ApplymentItem(
 	val userId: Int? = null,
 
 	@field:SerializedName("user")
-	val user: User? = null,
+	val user: UserMyCandidate? = null,
 
 	@field:SerializedName("status")
 	val status: Boolean? = null,
@@ -32,7 +32,7 @@ data class ApplymentItem(
 	val updatedAt: String? = null
 )
 
-data class User(
+data class UserMyCandidate(
 
 	@field:SerializedName("resume")
 	val resume: String? = null,

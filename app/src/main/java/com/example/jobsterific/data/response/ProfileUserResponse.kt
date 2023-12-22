@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName
 data class ProfileUserResponse(
 
 	@field:SerializedName("user")
-	val user: User? = null
+	val user: UserProfile? = null
 )
 
-data class User(
+data class UserProfile(
 
 	@field:SerializedName("resume")
 	val resume: String? = null,

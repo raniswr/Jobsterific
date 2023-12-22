@@ -1,11 +1,11 @@
-package com.example.jobsterific.data
+package com.example.jobsterific.data.response
 
 import com.google.gson.annotations.SerializedName
 
 data class MyApplymentResponse(
 
 	@field:SerializedName("applyment")
-	val applyment: List<ApplymentItem?>? = null
+	val applyment: List<ApplymentItems?>? = null
 )
 
 data class Batch(
@@ -44,26 +44,26 @@ data class Batch(
 	val updatedAt: String? = null
 )
 
-data class ApplymentItem(
+data class ApplymentItems(
 
-	@field:SerializedName("applyId")
+    @field:SerializedName("applyId")
 	val applyId: Int? = null,
 
-	@field:SerializedName("createdAt")
+    @field:SerializedName("createdAt")
 	val createdAt: String? = null,
 
-	@field:SerializedName("batch")
+    @field:SerializedName("batch")
 	val batch: Batch? = null,
 
-	@field:SerializedName("batchId")
+    @field:SerializedName("batchId")
 	val batchId: Int? = null,
 
-	@field:SerializedName("userId")
+    @field:SerializedName("userId")
 	val userId: Int? = null,
 
-	@field:SerializedName("status")
+    @field:SerializedName("status")
 	val status: Boolean? = null,
 
-	@field:SerializedName("updatedAt")
+    @field:SerializedName("updatedAt")
 	val updatedAt: String? = null
 )

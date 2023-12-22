@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".recruiter.ui.CandidatesFragment">
 
@@ -12,20 +13,20 @@
         android:orientation="vertical">
 
         <!-- HorizontalScrollView for category icons -->
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/scrollCategory"
-            android:layout_marginTop="20dp">
+<!--        <HorizontalScrollView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/scrollCategory"-->
+<!--            android:layout_marginTop="20dp">-->
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:id="@+id/categoryContainer"
-                android:orientation="horizontal">
-                <!-- Add your category icons or views here -->
-            </LinearLayout>
-        </HorizontalScrollView>
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:id="@+id/categoryContainer"-->
+<!--                android:orientation="horizontal">-->
+<!--                &lt;!&ndash; Add your category icons or views here &ndash;&gt;-->
+<!--            </LinearLayout>-->
+<!--        </HorizontalScrollView>-->
 
         <!-- TextView for section label -->
 

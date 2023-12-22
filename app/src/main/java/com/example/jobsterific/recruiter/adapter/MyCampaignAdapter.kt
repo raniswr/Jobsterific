@@ -1,47 +1,53 @@
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.jobsterific.R
-import com.example.jobsterific.recruiter.CourseRVModal
+import com.example.jobsterific.data.response.BatchItem
+import com.example.jobsterific.databinding.ItemBatchUserBinding
 
-class MyCampaignAdapter(
-    private val courseList: ArrayList<CourseRVModal>,
-    private val context: Context? = null
-) : RecyclerView.Adapter<MyCampaignAdapter.MyCampaignViewHolder>() {
+class MyCampaignAdapter(private val dataList: List<BatchItem?>?, var context : Context): ListAdapter<BatchItem, MyCampaignAdapter.MyViewHolder>(MyCampaignAdapter.DIFF_CALLBACK) {
+    var onItemClick: ((BatchItem?) -> Unit)? = null
 
-
-    var onItemClick: ((CourseRVModal) -> Unit)? = null
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): MyCampaignViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.item_my_campaign,
-            parent, false
-        )
-        return MyCampaignViewHolder(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyCampaignAdapter.MyViewHolder {
+        val binding = ItemBatchUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(binding)
     }
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val login = getItem(position)
+        holder.bind(login)
+        holder.itemView.setOnClickListener{
+            onItemClick?.invoke(login)
+        }
+    }
+    class MyViewHolder(val binding: ItemBatchUserBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(review: BatchItem){
+            binding.nameBatch
+                .text = " ${review.campaignName}"
+            binding.period
+                .text = "${review.startDate} - ${review.endDate}"
+            binding.description
+                .text = " ${review.campaignDesc}"
+            binding.job
+                .text = " ${review.campaignKeyword}"
 
-    override fun onBindViewHolder(holder: MyCampaignViewHolder, position: Int) {
-        val currentCourse = courseList[position]
-        holder.courseNameTV.text = currentCourse.courseName
-        holder.itemView.setOnClickListener {
-            onItemClick?.invoke(currentCourse)
+
         }
     }
 
-    override fun getItemCount(): Int {
-        return courseList.size
-    }
 
-    class MyCampaignViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val courseNameTV: TextView = itemView.findViewById(R.id.name)
-        val icon:ImageView= itemView.findViewById(R.id.periodIcon)
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BatchItem>() {
+            override fun areItemsTheSame(oldItem: BatchItem, newItem: BatchItem): Boolean {
+                return oldItem == newItem
+            }
+            override fun areContentsTheSame(oldItem: BatchItem, newItem: BatchItem): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 }
+
+

@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent">
     <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -88,6 +89,7 @@
                 android:fontFamily="@font/abezee_regular"
                 />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/DescriptionEditTextLayout"
             android:layout_width="match_parent"
@@ -146,6 +148,34 @@
                 android:fontFamily="@font/abezee_regular"
                 />
         </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="26dp"
+            app:boxBackgroundMode="outline"
+android:layout_marginTop="20dp"
+            app:boxStrokeColor="@color/buttonOutline"
+            app:startIconTint="@color/lightBlack"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:hintEnabled="false"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxStrokeWidth="0.5dp"
+            app:boxCornerRadiusTopStart="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:textColor="@color/lightBlack"
+                android:inputType="textWebEditText"
+                android:hint="Phone"
+                android:textColorHint="@color/lightGray"
+                android:fontFamily="@font/abezee_regular"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/adressEditTextLayout"

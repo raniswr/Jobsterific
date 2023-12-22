@@ -2,44 +2,53 @@ package com.example.jobsterific.recruiter.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.jobsterific.R
-import com.example.jobsterific.recruiter.CourseRVModal
+import com.example.jobsterific.data.response.ApplymentItem
+import com.example.jobsterific.databinding.ItemViewCandidateOfCampaignBinding
+class ViewCandidateOfCampaignAdapter(private val dataList: List<ApplymentItem?>?, var context : Context): ListAdapter<ApplymentItem, ViewCandidateOfCampaignAdapter.MyViewHolder>(ViewCandidateOfCampaignAdapter.DIFF_CALLBACK) {
+    var onItemClick: ((ApplymentItem?) -> Unit)? = null
 
-class ViewCandidateOfCampaignAdapter(
-    private val courseList: ArrayList<CourseRVModal>,
-    private val context: Context? = null
-) : RecyclerView.Adapter<ViewCandidateOfCampaignAdapter.ViewCandidateOfCampaignViewHolder>() {
-
-    var onItemClick: ((CourseRVModal) -> Unit)? = null
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ViewCandidateOfCampaignViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.item_view_candidate_of_campaign,
-            parent, false
-        )
-        return ViewCandidateOfCampaignViewHolder(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewCandidateOfCampaignAdapter.MyViewHolder {
+        val binding = ItemViewCandidateOfCampaignBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(binding)
     }
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val login = getItem(position)
+        holder.bind(login)
+        holder.itemView.setOnClickListener{
+            onItemClick?.invoke(login)
+        }
+    }
+    class MyViewHolder(val binding: ItemViewCandidateOfCampaignBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(review: ApplymentItem){
+            binding.name
+                .text = " ${review.user?.firstName} ${review.user?.lastName}"
+            binding.job
+                .text = "${review.user?.job}"
+            binding.email
+                .text = " ${review.user?.email}"
+            binding.adress
+                .text = " ${review.user?.address}"
 
-    override fun onBindViewHolder(holder:ViewCandidateOfCampaignViewHolder, position: Int) {
-        val currentCourse = courseList[position]
-        holder.courseNameTV.text = currentCourse.courseName
-        holder.itemView.setOnClickListener {
-            onItemClick?.invoke(currentCourse)
+
         }
     }
 
-    override fun getItemCount(): Int {
-        return courseList.size
-    }
 
-    class ViewCandidateOfCampaignViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val courseNameTV: TextView = itemView.findViewById(R.id.name)
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ApplymentItem>() {
+            override fun areItemsTheSame(oldItem: ApplymentItem, newItem: ApplymentItem): Boolean {
+                return oldItem == newItem
+            }
+            override fun areContentsTheSame(oldItem: ApplymentItem, newItem: ApplymentItem): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 }
+
+
+

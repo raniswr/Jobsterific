@@ -1,6 +1,10 @@
 package com.example.jobsterific.user.ui
+
+import ApiConfig
+import ProfileUserViewModel
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -14,8 +18,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.jobsterific.R
 import com.example.jobsterific.ViewModelFactory
+import com.example.jobsterific.ViewModelFactoryProfile
+import com.example.jobsterific.authentication.WelcomeActivity
+import com.example.jobsterific.data.response.LogoutResponse
 import com.example.jobsterific.databinding.FragmentProfileBinding
 import com.example.jobsterific.user.viewmodel.UploadViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 private const val ARG_PARAM1 = "param1"
@@ -25,9 +35,15 @@ class ProfileFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var binding: FragmentProfileBinding? = null
+    var token = ""
     private val viewModel: UploadViewModel by viewModels {
-        ViewModelFactory.getInstance(requireContext())
+        ViewModelFactory.getInstance(requireContext(), token)
     }
+
+    private val viewModel3 by viewModels<ProfileUserViewModel> {
+        ViewModelFactoryProfile.getInstance(requireContext(), token)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,11 +87,51 @@ iconResume.setOnClickListener  {
                 }
             }
         }
+        viewModel3.getSession().observe(this) { user ->
+
+                token = user.token
+            Log.d("ini token", token.toString())
+            if(user.token != null){
+                viewModel3.userProfile.observe(this) { user ->
+
+
+                    binding!!.email.text = user.user?.email
+                    Log.d("haloo", user.user?.email.toString())
+                    binding!!.Username.text =" ${user.user?.firstName} ${user.user?.lastName} "
+                    binding!!.number.text = user.user?.phone.toString()
+                    binding!!.job.text = user.user?.job
+                    binding!!.adress.text = user.user?.address
+                    if(user.user?.status == true){
+                        binding!!.status.text = "Hired"
+                    }else{
+                        binding!!.status.text = "Unhired"
+                    }
+                    binding!!.name.text = " ${user.user?.firstName} ${user.user?.lastName} "
+
+
+
+
+                }
+                viewModel3.getProfile(token)
+
+
+            }
+
+
+
+
+        }
+
+
+
         return binding!!.root
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setHasOptionsMenu(true)
 
     }
@@ -100,14 +156,40 @@ iconResume.setOnClickListener  {
                 startActivity(intent)
                 true
             }
+            R.id.applyment -> {
+                val intent = Intent(requireContext(), MyApplymentActivity::class.java)
+                startActivity(intent)
+                true
+            }
             R.id.action_logout -> {
+                viewModel3.logout()
+                val intent = Intent(requireContext(), WelcomeActivity::class.java)
+                startActivity(intent)
+                logout(token)
+
                 true
             }
             else -> false
 
         }
     }
-
+    private fun logout(token: String) {
+        val client = ApiConfig.getApiService2(token).logout()
+        client.enqueue(object : Callback<LogoutResponse> {
+            override fun onResponse(
+                call: Call<LogoutResponse>,
+                response: Response<LogoutResponse>
+            ) {
+                val responseBody = response.body()
+                if (responseBody != null) {
+                    Log.d("Logout", responseBody.message.toString())
+                } else {
+                    Log.d("Gagal Logout", responseBody?.message.toString())
+                }
+            }
+            override fun onFailure(call: Call<LogoutResponse>, t: Throwable) {}
+        })
+    }
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =

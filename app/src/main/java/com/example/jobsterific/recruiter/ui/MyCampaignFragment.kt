@@ -1,11 +1,27 @@
 package com.example.jobsterific.recruiter.ui
 
+import ApiConfig
+import BatchAdapter
+import MyCampaignAdapter
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.jobsterific.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.jobsterific.ViewModelFactoryProfile
+import com.example.jobsterific.data.response.BatchItem
+import com.example.jobsterific.data.response.MyBatchResponse
+import com.example.jobsterific.databinding.FragmentMyCampaignBinding
+import com.example.jobsterific.recruiter.viewmodel.ContenderViewModel
+import com.google.gson.Gson
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,43 +34,89 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class MyCampaignFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private lateinit var binding: FragmentMyCampaignBinding
+    var token = ""
+
+    private lateinit var batchAdapter: BatchAdapter
+    private val viewModel by viewModels<ContenderViewModel> {
+        ViewModelFactoryProfile.getInstance(requireContext(), token)
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_campaign, container, false)
+    ): View {
+        binding = FragmentMyCampaignBinding.inflate(inflater, container, false)
+
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding!!.idRVCampaign.layoutManager = layoutManager
+        val itemDecoration = DividerItemDecoration(requireContext(), layoutManager.orientation)
+        binding!!.idRVCampaign.addItemDecoration(itemDecoration)
+        viewModel.getSession().observe(this) { user ->
+            token = user.token
+
+            Log.d("token inih", token.toString())
+            getMyBatch(token, user.userId)
+        }
+
+        // Initialize batchAdapter here
+        batchAdapter = BatchAdapter(emptyList(), requireContext())
+
+        binding?.idRVCampaign?.adapter = batchAdapter
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MyCampaignFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MyCampaignFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        binding.newCampaign.setOnClickListener {
+            val intent = Intent(requireContext(), NewCampaignActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun getMyBatch(token: String, userId: String) {
+        val client = ApiConfig.getApiService2(token = token).getMyBatch()
+        client.enqueue(object : Callback<MyBatchResponse> {
+            override fun onResponse(
+                call: Call<MyBatchResponse>,
+                response: Response<MyBatchResponse>
+            ) {
+                val responseBody = response.body()
+
+                if (responseBody != null) {
+                    setUserData(responseBody.batch.orEmpty())
                 }
             }
+
+            override fun onFailure(call: Call<MyBatchResponse>, t: Throwable) {
+                // Handle failure
+            }
+        })
     }
+
+    private var dataUsers: List<BatchItem> = emptyList()
+
+    private fun setUserData(itemUser: List<BatchItem?>) {
+        val batchItemList: List<BatchItem> = itemUser.filterNotNull()
+
+        // Check if the fragment is attached to a context
+        val context = context ?: return
+
+        val adapter = MyCampaignAdapter(dataUsers, context)
+        adapter.submitList(batchItemList)
+        binding?.idRVCampaign?.adapter = adapter
+        dataUsers = batchItemList
+
+        adapter.onItemClick = {
+            val intent = Intent(context, DetailMyCampaignActivity::class.java)
+            intent.putExtra("detailUser", Gson().toJson(it))
+            startActivity(intent)
+        }
+    }
+
+
+
 }

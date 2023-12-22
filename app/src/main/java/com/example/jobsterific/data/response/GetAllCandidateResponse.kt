@@ -2,13 +2,7 @@ package com.example.jobsterific.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class GetAllCandidateResponse(
-
-	@field:SerializedName("applymentsData")
-	val applymentsData: List<ApplymentsDataItem?>? = null
-)
-
-data class User(
+data class RecommendationsItem(
 
 	@field:SerializedName("resume")
 	val resume: String? = null,
@@ -49,6 +43,9 @@ data class User(
 	@field:SerializedName("createdAt")
 	val createdAt: String? = null,
 
+	@field:SerializedName("score")
+	val score: Any? = null,
+
 	@field:SerializedName("password")
 	val password: String? = null,
 
@@ -56,7 +53,7 @@ data class User(
 	val phone: Any? = null,
 
 	@field:SerializedName("predict")
-	val predict: Any? = null,
+	val predict: String? = null,
 
 	@field:SerializedName("job")
 	val job: String? = null,
@@ -71,26 +68,8 @@ data class User(
 	val updatedAt: String? = null
 )
 
-data class ApplymentsDataItem(
+data class GetAllCandidateResponse(
 
-	@field:SerializedName("applyId")
-	val applyId: Int? = null,
-
-	@field:SerializedName("createdAt")
-	val createdAt: String? = null,
-
-	@field:SerializedName("batchId")
-	val batchId: Int? = null,
-
-	@field:SerializedName("userId")
-	val userId: Int? = null,
-
-	@field:SerializedName("user")
-	val user: User? = null,
-
-	@field:SerializedName("status")
-	val status: Boolean? = null,
-
-	@field:SerializedName("updatedAt")
-	val updatedAt: String? = null
+	@field:SerializedName("recommendations")
+	val recommendations: List<RecommendationsItem?>? = null
 )
